@@ -1,0 +1,14 @@
+[
+	{
+		"title": "Devworks Bootcamp",
+		"details": "Devworks is a full stack JavaScript Bootcamp located in the heart of Boston that focuses on the technologies you need to get a high paying job as a web developer",
+        "number":1000
+	},
+    {
+        "title": "test mongo json data insterted",
+        "details": "test with slugify",
+        "number": 1000,
+        "slug": "test-mongo-json-data-insterted",
+        "__v": 0
+    }
+]

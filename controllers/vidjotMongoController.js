@@ -51,13 +51,32 @@ exports.getAllIdeas = asyncHandler(async (req, res) => {
     // try{
         let query;
         console.log(req.query);
+        // copy req.query
+        const reqQuery = { ...req.query }
 
+        // remove fields to exclude
+        const removeFields = ['select'];
+
+        // loop over removeFields and delete them from req.query
+        removeFields.forEach(param => delete reqQuery[param]);
+
+        // create query string
         let queryStr = JSON.stringify(req.query);
+
+        // create operators($gt, $gt, etc)
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
         console.log(queryStr);
         query = idea.find(JSON.parse(queryStr));
+        
+        // select field 
+        if(req.query.select) {
+            const fields = req.query.select.split(',').join(' ');
+            console.log(fields);
+            query = query.select(fields); 
+        }
 
+ 
         const allIdeas = await query
         if(allIdeas === ""){
             return next(new errorResponse(`No Ideas Yet....`, 200));

@@ -23,6 +23,10 @@ const ideaSchema = new Schema({
     category:{
         type:String,
         require: [true, 'Plz add some category']
+    },
+    createdAt: {
+        type: String,
+        default: Date.now
     }
 });
 ideaSchema.pre('save', function(next) {

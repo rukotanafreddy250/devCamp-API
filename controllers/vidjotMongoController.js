@@ -54,8 +54,8 @@ exports.getAllIdeas = asyncHandler(async (req, res) => {
         // copy req.query
         const reqQuery = { ...req.query }
 
-        // remove fields to exclude
-        const removeFields = ['select'];
+        // remove fields to exclude 
+        const removeFields = ['select', 'sort'];
 
         // loop over removeFields and delete them from req.query
         removeFields.forEach(param => delete reqQuery[param]);
@@ -68,15 +68,24 @@ exports.getAllIdeas = asyncHandler(async (req, res) => {
 
         console.log(queryStr);
         query = idea.find(JSON.parse(queryStr));
-        
+        console.log(queryStr);
+        console.log(req.query);
         // select field 
         if(req.query.select) {
             const fields = req.query.select.split(',').join(' ');
             console.log(fields);
-            query = query.select(fields); 
+            query = idea.find().select(fields); 
         }
-
- 
+        
+        
+        if(req.query.sort) {
+            const sortBy = req.query.sort.split(',').join(' ');
+            console.log(sortBy, "from sortBy");
+            query = idea.find().sort(sortBy); 
+        }else {
+            query = idea.find().sort('-createdAt'); 
+        }
+        
         const allIdeas = await query
         if(allIdeas === ""){
             return next(new errorResponse(`No Ideas Yet....`, 200));

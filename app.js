@@ -31,7 +31,7 @@ const idealModel = require('./models/Ideas');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method')); 
 
 
 

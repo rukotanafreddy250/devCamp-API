@@ -5,12 +5,18 @@ const router = express.Router();
 
 const {getIndexHome, PostIdea, getAllIdeas, getSingleIdea,putEditIdeas ,deleteIdea} = require('../controllers/vidjotMongoController');
 
-router.get('/', getIndexHome);
-router.get('/idea/:id', getSingleIdea);
-router.post('/idea', PostIdea);
-router.get('/ideas', getAllIdeas);
-router.put('/ideas/:id', putEditIdeas);
-router.delete('/ideas/:id', deleteIdea);
+
+// include other resources Router
+const courseRouter = require('./courseRouter');
+
+router.use('/:id/courses', courseRouter);
+
+
+router.get('/', getAllIdeas);
+router.get('/:id', getSingleIdea);
+router.post('/', PostIdea);
+router.put('/:id', putEditIdeas);
+router.delete('/:id', deleteIdea);
 
 
 module.exports = router;

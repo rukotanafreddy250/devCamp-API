@@ -29,6 +29,17 @@ const ideaSchema = new Schema({
         default: Date.now
     }
 });
+
+// cascade delete courses when a bootcamp is deleted
+ideaSchema.pre('remove', async function (next) {
+    console.log(`course being delete from ideas ${this._id}`);
+    await this.model('Course').deleteMany({bootcamp: this._id});
+    next();
+});
+
+
+
+
 ideaSchema.pre('save', function(next) {
     this.slug = slugify(this.title, {lower: true});
     // console.log('slugify ran', this.title);

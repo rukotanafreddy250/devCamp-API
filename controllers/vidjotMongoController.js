@@ -114,12 +114,14 @@ exports.putEditIdeas = asyncHandler(async (req, res) => {
 
 exports.deleteIdea = asyncHandler(async(req, res, next) => { 
     // try{
-        const deletingVidjot = await idea.findByIdAndDelete(req.params.id);
+        // const deletingVidjot = await idea.findByIdAndDelete(req.params.id);
+        const deletingVidjot = await idea.findById(req.params.id);
         if(!deletingVidjot) {
             return next(
                 new errorResponse(`No such idea for deletion`, 404)
             );
         }
+        deletingVidjot.remove();
         res.status(200).send('Ideas removed');
     // }catch(err) {
     //     next(err);  

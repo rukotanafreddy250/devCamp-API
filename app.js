@@ -25,6 +25,7 @@ const errorhandle = require("./middlewares/errorHandler");
 
 const Dbconnection = require('./config/connectDB');
 const router = require('./routes/vidjotRoutes');
+const routerCourses = require('./routes/courseRouter');
 const idealModel = require('./models/Ideas');
 
 
@@ -35,7 +36,9 @@ app.use(methodOverride('_method'));
 
 
 
-app.use(router);
+app.use('/api/v1/ideas', router);
+app.use('/api/v1/course', routerCourses);
+
 app.use(errorHandler);
 
 app.use("", (req, res) => {

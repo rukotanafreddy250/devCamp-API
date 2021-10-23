@@ -24,7 +24,7 @@ const CourseModel = new Schema({
         require: [true, "plz add a cost"],
         enum: ['beginner', 'intermediate', 'advanced']
     },
-    scholarshipAvailable: {
+    scholarshipAvailable: { 
         type: Boolean,
         default: false
     },

@@ -1,8 +1,10 @@
 const errorHandler = require('../middlewares/errorHandler');
 const idea = require('../models/Ideas');
+const bootcamp = require('../models/bootcamp');
 const errorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middlewares/async');
 const { QueryCursor } = require('mongoose');
+const Bootcamp = require('../models/bootcamp');
 
 
 exports.getIndexHome = (req, res) => {
@@ -12,10 +14,10 @@ exports.getIndexHome = (req, res) => {
     })
 }
 
-
+ 
 exports.PostIdea = async (req, res, next) => {
     try {
-        const vidjot = await idea.create(req.body);
+        const vidjot = await bootcamp.create(req.body);
         res.status(200).json({
             success: true,
             data: req.body
@@ -115,7 +117,7 @@ exports.putEditIdeas = asyncHandler(async (req, res) => {
 exports.deleteIdea = asyncHandler(async(req, res, next) => { 
     // try{
         // const deletingVidjot = await idea.findByIdAndDelete(req.params.id);
-        const deletingVidjot = await idea.findById(req.params.id);
+        const deletingVidjot = await Bootcamp.findById(req.params.id);
         if(!deletingVidjot) {
             return next(
                 new errorResponse(`No such idea for deletion`, 404)

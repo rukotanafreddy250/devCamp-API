@@ -25,8 +25,9 @@ const errorhandle = require("./middlewares/errorHandler");
 
 const Dbconnection = require('./config/connectDB');
 const router = require('./routes/vidjotRoutes');
-const routerCourses = require('./routes/courseRouter');
 const idealModel = require('./models/Ideas');
+const routerCourses = require('./routes/courseRouter');
+
 
 
 
